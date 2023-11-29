@@ -2374,6 +2374,9 @@ struct dfggenPass : public FunctionPass
 			LLVM_DEBUG(dbgs() << "[Skeleton.cpp][generateTrigDFGDOT end]\n\n");
 
 #ifdef REMOVE_AGI
+			LLVM_DEBUG(dbgs() << "\n[Skeleton.cpp][PrintOuts] begin\n");
+			LoopDFG->PrintOuts();
+			LLVM_DEBUG(dbgs() << "\n[Skeleton.cpp][PrintOuts] end\n");
 			return true;
 #endif
 			if(dfgType == "PartPred"){

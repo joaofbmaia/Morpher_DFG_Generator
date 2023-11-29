@@ -1453,7 +1453,7 @@ void DFGPartPred::scheduleASAP() {
 		level++;
 	}
 #ifdef REMOVE_AGI
-	LLVM_DEBUG(dbgs() << "Visited nodes size : " << visitedNodes.size() << ", Nodes list size:" << NodeList.size() << endl);
+	LLVM_DEBUG(dbgs() << "Visited nodes size : " << visitedNodes.size() << ", Nodes list size:" << NodeList.size() << "\n");
 #else
 	assert(visitedNodes.size() == NodeList.size());
 #endif
@@ -2505,7 +2505,7 @@ void DFGPartPred::printDOT(std::string fileName) {
 	//Write the initial info
 	ofs << "digraph Region_18 {\n";
 	ofs << "\tgraph [ nslimit = \"1000.0\",\n";
-	ofs <<	"\torientation = landscape,\n";
+	ofs <<	"\torientation = portrait,\n";
 	ofs <<	"\t\tcenter = true,\n";
 	ofs <<	"\tpage = \"8.5,11\",\n";
 	ofs << "\tcompound=true,\n";
@@ -2661,7 +2661,7 @@ void DFGPartPred::printDOTsimple(std::string fileName) {
 	//Write the initial info
 	ofs << "digraph Region_18 {\n";
 	ofs << "\tgraph [ nslimit = \"1000.0\",\n";
-	ofs <<	"\torientation = landscape,\n";
+	ofs <<	"\torientation = portrait,\n";
 	ofs <<	"\t\tcenter = true,\n";
 	ofs <<	"\tpage = \"8.5,11\",\n";
 	ofs << "\tcompound=true,\n";
