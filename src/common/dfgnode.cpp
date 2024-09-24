@@ -7,12 +7,21 @@ dfgNode::dfgNode(Instruction *ins, DFG* parent){
 	this->BB = ins->getParent();
 	this->Parent = parent;
 
+    // print instruction name
+	outs() << "Instruction Name: ";
+	ins->print(outs());
+	outs() << "\n";
 	for (int i = 0; i < ins->getNumOperands(); ++i) {
 		if(ConstantInt *CI = dyn_cast<ConstantInt>(ins->getOperand(i))){
 
 			if(dyn_cast<PHINode>(ins)){
 				break;
 			}
+
+			//print constant value
+			outs() << "Constant Value: ";
+			CI->getValue().print(outs(), true);
+			outs() << "\n";
 
 			if(this->hasConstantVal()){
 				LLVM_DEBUG(ins->dump());
@@ -21,6 +30,27 @@ dfgNode::dfgNode(Instruction *ins, DFG* parent){
 //			assert(this->hasConstantVal()==false);
 
 			this->setConstantVal(CI->getSExtValue());
+		}
+		if(ConstantFP *CFP = dyn_cast<ConstantFP>(ins->getOperand(i))){
+
+			if(dyn_cast<PHINode>(ins)){
+				break;
+			}
+
+			//print constant value
+			outs() << "Constant Value: ";
+			CFP->getValueAPF().print(outs());
+			outs() << "\n";
+
+			if(this->hasConstantVal()){
+				LLVM_DEBUG(ins->dump());
+			}
+
+			float constVal = CFP->getValueAPF().convertToFloat();
+			uint32_t floatAsInt = *(uint32_t*)&constVal;
+			this->setConstantVal(floatAsInt);
+
+			outs() << "Constant Value as Int: " << floatAsInt << "\n";
 		}
 	}
 
